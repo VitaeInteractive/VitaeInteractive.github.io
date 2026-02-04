@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vitae Interactive – Technical Designer Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 2rem; line-height: 1.6; }
+    header { margin-bottom: 2rem; }
+    h1 { margin-bottom: 0.25rem; }
+    .tagline { color: #555; margin-top: 0; }
+    nav a { margin-right: 1rem; text-decoration: none; color: #007acc; }
+    section { margin-bottom: 2rem; }
+    .project { border: 1px solid #ddd; padding: 1rem; margin-bottom: 1rem; border-radius: 6px; }
+    .project h3 { margin-top: 0; }
+    footer { margin-top: 2rem; font-size: 0.85rem; color: #777; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Vitae Interactive</h1>
+    <p class="tagline">Technical Designer · Gameplay Systems & Tools</p>
+    <nav>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="projects">
+    <h2>Projects</h2>
+
+    <div class="project">
+      <h3>Core Movement & Interaction Prototype</h3>
+      <p><strong>Role:</strong> Technical Designer</p>
+      <p>A small Unreal Engine prototype focusing on character movement, camera control, and basic interaction systems.</p>
+      <ul>
+        <li>Implemented walk, jump, and sprint using Blueprints.</li>
+        <li>Created an interaction system (press key to interact with objects).</li>
+        <li>Documented Blueprint graphs and design decisions.</li>
+      </ul>
+      <p><em>Demo video / GIF link goes here.</em></p>
+    </div>
+
+    <div class="project">
+      <h3>Ability & Cooldown System</h3>
+      <p><strong>Role:</strong> Technical Designer</p>
+      <p>Blueprint-based ability system with cooldowns and resource costs, designed to be data-driven and easy to expand.</p>
+      <ul>
+        <li>Designed ability states and timers.</li>
+        <li>Exposed tunable values for designers.</li>
+        <li>Prepared spreadsheets for balancing and iteration.</li>
+      </ul>
+      <p><em>Demo video / GIF link goes here.</em></p>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <p>I'm an Interactive Technology student with a concentration in Game Design, focusing on Technical Design – systems, tools, and implementation in Unreal Engine. My projected graduation year is 2028.</p>
+    <p>My interests include gameplay systems, AI behavior, and building tools that help other designers move faster.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+    <p>GitHub: <a href="https://github.com/VitaeInteractive">github.com/VitaeInteractive</a></p>
+    <p>LinkedIn: <em>Add link here when ready.</em></p>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> Vitae Interactive. All rights reserved.</p>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </footer>
+</body>
+</html>

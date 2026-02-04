@@ -11,19 +11,20 @@
 
   <style>
     :root {
-      /* Gunmetal + gold palette */
-      --bg: #060809;
-      --bg-alt: #13171a;
-      --card: #171c20;
-      --accent: #f5c542;         /* main gold */
-      --accent-strong: #facc15;  /* brighter gold */
-      --accent-soft: rgba(245, 197, 66, 0.22);
+      /* Gold + gunmetal palette */
+      --bg: #050608;
+      --bg-soft: #0c1014;
+      --card: #11151a;
+      --accent: #f5c542;         /* warm gold */
+      --accent-soft: rgba(245, 197, 66, 0.18);
+      --accent-strong: #facc15;
       --text-main: #f9fafb;
       --text-muted: #9ca3af;
-      --border-subtle: rgba(107, 114, 128, 0.5);
-      --radius-lg: 18px;
+      --border-subtle: rgba(148, 163, 184, 0.5);
+      --radius-lg: 20px;
+      --radius-pill: 999px;
       --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.85);
-      --shadow-chip: 0 10px 30px rgba(0, 0, 0, 0.75);
+      --shadow-chip: 0 12px 35px rgba(0, 0, 0, 0.7);
       --transition-fast: 160ms ease-out;
       --transition-med: 220ms ease-out;
     }
@@ -36,7 +37,9 @@
 
     html, body {
       scroll-behavior: smooth;
-      background: radial-gradient(circle at top, #111827 0, #020617 55%, #020304 100%);
+      background:
+        radial-gradient(circle at top left, #1f2933 0, transparent 50%),
+        radial-gradient(circle at bottom right, #020308 0, #020308 55%);
       color: var(--text-main);
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Segoe UI", sans-serif;
@@ -56,39 +59,68 @@
       display: block;
     }
 
-    /* Layout */
     .page {
-      max-width: 1120px;
+      max-width: 1040px;
       margin: 0 auto;
-      padding: 1.25rem 1.25rem 3rem;
+      padding: 1.5rem 1.25rem 3.25rem;
     }
 
     @media (min-width: 768px) {
       .page {
-        padding: 1.75rem 2rem 4rem;
+        padding: 2.25rem 2rem 3.75rem;
       }
     }
 
-    /* Frosted glass shell */
     .shell {
-      border-radius: 32px;
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(6, 8, 9, 0.96));
+      border-radius: 28px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background:
+        radial-gradient(circle at top left, rgba(245, 197, 66, 0.18), transparent 60%),
+        linear-gradient(145deg, rgba(7, 10, 13, 0.98), rgba(9, 12, 16, 0.97));
       box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(22px);
+      backdrop-filter: blur(20px);
       overflow: hidden;
+      position: relative;
     }
 
-    /* Top nav */
+    /* subtle whimsical “paint” blobs */
+    .shell::before,
+    .shell::after {
+      content: "";
+      position: absolute;
+      inset: -80px auto auto -60px;
+      width: 180px;
+      height: 180px;
+      border-radius: 60% 40% 55% 45%;
+      background: radial-gradient(circle at 30% 30%, rgba(245, 197, 66, 0.32), transparent 60%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .shell::after {
+      inset: auto -80px -120px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 45% 55% 60% 40%;
+      background: radial-gradient(circle at 70% 70%, rgba(15, 23, 42, 0.7), transparent 60%);
+      opacity: 0.9;
+    }
+
+    /* NAVBAR */
+
     .nav {
+      position: relative;
+      z-index: 1;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.1rem 1.5rem;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-      background:
-        radial-gradient(circle at top left, rgba(245, 197, 66, 0.16), transparent 55%),
-        linear-gradient(to right, rgba(15, 23, 42, 0.98), rgba(6, 8, 9, 0.98));
+      padding: 1rem 1.5rem 0.9rem;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.28);
+      background: linear-gradient(
+        to right,
+        rgba(15, 23, 42, 0.95),
+        rgba(9, 11, 14, 0.98)
+      );
     }
 
     .nav-left {
@@ -98,41 +130,41 @@
     }
 
     .logo-img {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       object-fit: contain;
-      filter: drop-shadow(0 12px 40px rgba(245, 197, 66, 0.75));
+      filter: drop-shadow(0 14px 40px rgba(245, 197, 66, 0.85));
     }
 
     .logo-text-main {
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      font-size: 0.95rem;
+      font-weight: 650;
+      letter-spacing: 0.12em;
+      font-size: 0.9rem;
       text-transform: uppercase;
     }
 
     .logo-text-sub {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
     }
 
     .nav-links {
       display: none;
-      gap: 1rem;
-      font-size: 0.9rem;
+      gap: 0.8rem;
+      font-size: 0.86rem;
     }
 
     .nav-links a {
-      padding: 0.3rem 0.7rem;
-      border-radius: 999px;
+      padding: 0.25rem 0.7rem;
+      border-radius: var(--radius-pill);
       color: var(--text-muted);
       transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
     }
 
     .nav-links a:hover {
-      background: rgba(15, 23, 42, 0.95);
+      background: rgba(11, 15, 19, 0.98);
       color: var(--accent-strong);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
       transform: translateY(-1px);
     }
 
@@ -143,12 +175,12 @@
     }
 
     .nav-pill {
-      font-size: 0.76rem;
-      padding: 0.35rem 0.8rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: var(--accent);
-      background: rgba(6, 8, 9, 0.92);
+      font-size: 0.75rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      color: var(--accent-strong);
+      background: rgba(5, 7, 9, 0.95);
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
@@ -162,19 +194,22 @@
       box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
     }
 
-    /* Sections */
+    /* GENERAL SECTIONS */
+
     main {
-      padding: 1.5rem 1.5rem 1.75rem;
+      position: relative;
+      z-index: 1;
+      padding: 1.5rem 1.5rem 1.8rem;
     }
 
     @media (min-width: 768px) {
       main {
-        padding: 2rem 2rem 2.5rem;
+        padding: 2.1rem 2rem 2.4rem;
       }
     }
 
     section {
-      margin-bottom: 2.75rem;
+      margin-bottom: 2.6rem;
     }
 
     section:last-of-type {
@@ -185,14 +220,14 @@
       font-size: 0.7rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.35rem;
+      color: var(--accent-strong);
+      margin-bottom: 0.3rem;
     }
 
     .section-title {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 600;
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.6rem;
     }
 
     .section-subtitle {
@@ -200,33 +235,41 @@
       color: var(--text-muted);
     }
 
-    /* Hero */
+    /* HERO */
+
     .hero {
       display: grid;
-      gap: 1.75rem;
+      gap: 1.7rem;
     }
 
     @media (min-width: 880px) {
       .hero {
-        grid-template-columns: minmax(0, 1.45fr) minmax(0, 1.1fr);
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
         align-items: center;
       }
     }
 
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.2rem 0.55rem;
-      border-radius: 999px;
-      background: rgba(6, 8, 9, 0.96);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-bottom: 0.75rem;
+    .hero-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
     }
 
-    .hero-eyebrow span {
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.33rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(7, 9, 12, 0.96);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      box-shadow: var(--shadow-chip);
+    }
+
+    .hero-pill span {
       color: var(--accent-strong);
       font-weight: 500;
     }
@@ -234,12 +277,12 @@
     .hero-title {
       font-size: 2rem;
       line-height: 1.15;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.45rem;
     }
 
     @media (min-width: 768px) {
       .hero-title {
-        font-size: 2.4rem;
+        font-size: 2.45rem;
       }
     }
 
@@ -250,14 +293,14 @@
     .hero-lede {
       font-size: 0.98rem;
       color: #e5e7eb;
-      max-width: 32rem;
+      max-width: 34rem;
       margin-bottom: 0.9rem;
     }
 
     .hero-meta {
       font-size: 0.82rem;
       color: var(--text-muted);
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.3rem;
     }
 
     .hero-meta strong {
@@ -267,14 +310,14 @@
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-bottom: 1.6rem;
+      gap: 0.8rem;
+      margin-bottom: 1.4rem;
     }
 
     .btn-primary,
     .btn-ghost {
-      border-radius: 999px;
-      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-pill);
+      padding: 0.7rem 1.4rem;
       font-size: 0.9rem;
       font-weight: 500;
       cursor: pointer;
@@ -282,7 +325,7 @@
       outline: none;
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
+      gap: 0.4rem;
       text-decoration: none;
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-med), color var(--transition-med), border-color var(--transition-med);
     }
@@ -290,25 +333,25 @@
     .btn-primary {
       background: linear-gradient(135deg, var(--accent-strong), #fbbf24, #f59e0b);
       color: #111827;
-      box-shadow: 0 18px 40px rgba(245, 197, 66, 0.55);
+      box-shadow: 0 16px 40px rgba(245, 197, 66, 0.6);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 24px 55px rgba(245, 197, 66, 0.75);
+      box-shadow: 0 22px 55px rgba(245, 197, 66, 0.75);
     }
 
     .btn-ghost {
-      background: rgba(6, 8, 9, 0.96);
-      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(7, 9, 12, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.75);
       color: var(--text-main);
     }
 
     .btn-ghost:hover {
       border-color: var(--accent-strong);
-      background: rgba(6, 8, 9, 0.98);
+      background: rgba(7, 9, 12, 0.98);
       transform: translateY(-1px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85);
     }
 
     .btn-icon {
@@ -319,177 +362,121 @@
     .hero-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.45rem;
+      gap: 0.4rem;
     }
 
     .chip {
-      font-size: 0.75rem;
-      padding: 0.28rem 0.65rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: rgba(6, 8, 9, 0.96);
+      font-size: 0.76rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: var(--radius-pill);
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      background: rgba(9, 12, 16, 0.96);
       color: var(--text-muted);
-      box-shadow: var(--shadow-chip);
     }
 
     .chip span {
       color: var(--accent-strong);
     }
 
+    /* hero right: whimsical card */
+
     .hero-right {
-      position: relative;
-      isolation: isolate;
+      display: flex;
+      justify-content: center;
     }
 
     .hero-card {
-      border-radius: 26px;
+      width: 100%;
+      max-width: 360px;
+      border-radius: 30px;
       background:
-        radial-gradient(circle at top left, rgba(245, 197, 66, 0.2), transparent 60%),
-        radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.9), rgba(6, 8, 9, 0.98));
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      padding: 1.2rem 1.2rem 1.1rem;
+        radial-gradient(circle at 20% 0, rgba(245, 197, 66, 0.25), transparent 55%),
+        radial-gradient(circle at 80% 110%, rgba(15, 23, 42, 0.9), rgba(5, 7, 9, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      padding: 1.1rem 1.15rem 1.1rem;
       box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero-grid {
-      display: grid;
-      gap: 0.85rem;
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40px auto auto -30px;
+      width: 130px;
+      height: 130px;
+      border-radius: 60% 40% 55% 45%;
+      border: 1px dashed rgba(148, 163, 184, 0.55);
+      opacity: 0.6;
     }
 
-    @media (min-width: 480px) {
-      .hero-grid {
-        grid-template-columns: 1.3fr 1.1fr;
-      }
-    }
-
-    .hero-grid-main {
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-direction: column;
-      gap: 0.7rem;
-    }
-
-    .hero-grid-row {
-      display: flex;
       gap: 0.6rem;
-      align-items: center;
+      font-size: 0.84rem;
     }
 
-    .pill-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .pill-value {
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
-    .hero-stat {
-      border-radius: 14px;
-      background: rgba(6, 8, 9, 0.96);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      padding: 0.6rem 0.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-    }
-
-    .hero-stat-label {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-    }
-
-    .hero-stat-value {
+    .hero-card-title {
       font-size: 0.95rem;
-      font-weight: 500;
+      font-weight: 600;
+    }
+
+    .hero-card-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
+
+    .hero-mini-pill {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-pill);
+      background: rgba(7, 9, 12, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      color: var(--accent-strong);
+      align-self: flex-start;
     }
 
     .hero-meter {
       height: 6px;
-      border-radius: 999px;
+      border-radius: var(--radius-pill);
       background: rgba(15, 23, 42, 1);
       overflow: hidden;
-      margin-top: 0.3rem;
+      margin-top: 0.35rem;
     }
 
     .hero-meter-fill {
       height: 100%;
-      border-radius: 999px;
+      border-radius: var(--radius-pill);
       background: linear-gradient(to right, #facc15, #fbbf24, #f97316);
-      width: 72%;
+      width: 70%;
     }
 
-    .hero-tagline {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .hero-grid-side {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .mini-card {
-      border-radius: 14px;
-      background: rgba(6, 8, 9, 0.98);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      padding: 0.65rem 0.7rem;
+    .hero-note {
       font-size: 0.78rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
     }
 
-    .mini-card strong {
-      font-size: 0.8rem;
+    /* SIMPLE CARD / GRID STYLES */
+
+    .card-soft {
+      border-radius: var(--radius-lg);
+      background: rgba(10, 13, 17, 0.96);
+      border: 1px solid var(--border-subtle);
+      padding: 1rem 1.1rem;
+      font-size: 0.88rem;
     }
 
-    .mini-pill {
-      font-size: 0.7rem;
-      padding: 0.16rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.65);
-      display: inline-flex;
-      align-self: flex-start;
-      color: var(--accent-strong);
-    }
-
-    .hero-orbit {
-      position: absolute;
-      inset: -18px -14px auto auto;
-      pointer-events: none;
-      opacity: 0.8;
-    }
-
-    .hero-orbit-ring {
-      width: 110px;
-      height: 110px;
-      border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.55);
-      position: relative;
-    }
-
-    .hero-orbit-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--accent-strong);
-      position: absolute;
-      top: 8px;
-      left: 54px;
-      box-shadow: 0 0 18px rgba(245, 197, 66, 0.9);
-    }
-
-    /* Projects */
     .projects-grid {
       display: grid;
-      gap: 1.2rem;
+      gap: 1rem;
     }
 
-    @media (min-width: 820px) {
+    @media (min-width: 860px) {
       .projects-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -498,53 +485,44 @@
     .project-card {
       border-radius: var(--radius-lg);
       background:
-        radial-gradient(circle at top left, rgba(245, 197, 66, 0.18), transparent 60%),
-        radial-gradient(circle at bottom, rgba(6, 8, 9, 0.98), rgba(6, 8, 9, 1));
-      border: 1px solid var(--border-subtle);
-      padding: 1rem 1rem 0.9rem;
+        radial-gradient(circle at top left, var(--accent-soft), transparent 60%),
+        rgba(9, 12, 16, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      padding: 0.9rem 1rem 0.9rem;
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.5rem;
+      font-size: 0.86rem;
       position: relative;
       overflow: hidden;
     }
 
-    .project-chip-row {
+    .project-tag-row {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       gap: 0.4rem;
-    }
-
-    .project-tag {
-      font-size: 0.7rem;
-      padding: 0.16rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(6, 8, 9, 0.96);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      color: var(--accent-strong);
-    }
-
-    .project-meta {
       font-size: 0.76rem;
       color: var(--text-muted);
     }
 
+    .project-tag {
+      padding: 0.16rem 0.55rem;
+      border-radius: var(--radius-pill);
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      background: rgba(7, 9, 12, 0.96);
+      color: var(--accent-strong);
+    }
+
     .project-title {
-      font-size: 1.02rem;
+      font-size: 0.98rem;
       font-weight: 600;
     }
 
-    .project-body {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-    }
-
     .project-list {
-      margin-top: 0.4rem;
-      margin-bottom: 0.25rem;
+      margin-top: 0.35rem;
+      margin-bottom: 0.2rem;
       padding-left: 1.1rem;
-      font-size: 0.83rem;
+      color: var(--text-muted);
     }
 
     .project-link {
@@ -553,21 +531,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.25rem;
-      margin-top: 0.15rem;
     }
 
-    .project-orbit-blur {
-      position: absolute;
-      inset: auto -50px -60px auto;
-      width: 120px;
-      height: 120px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(245, 197, 66, 0.38), transparent 60%);
-      opacity: 0.8;
-      pointer-events: none;
-    }
-
-    /* Skills */
     .skills-grid {
       display: grid;
       gap: 0.9rem;
@@ -575,68 +540,39 @@
 
     @media (min-width: 880px) {
       .skills-grid {
-        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.1fr);
       }
-    }
-
-    .skills-card {
-      border-radius: var(--radius-lg);
-      background: rgba(6, 8, 9, 0.98);
-      border: 1px solid var(--border-subtle);
-      padding: 0.9rem 1rem;
-      font-size: 0.86rem;
     }
 
     .skills-list {
       display: flex;
       flex-wrap: wrap;
       gap: 0.45rem;
-      margin-top: 0.45rem;
+      margin-top: 0.4rem;
     }
 
     .skills-badge {
       font-size: 0.78rem;
       padding: 0.25rem 0.7rem;
-      border-radius: 999px;
+      border-radius: var(--radius-pill);
       border: 1px solid rgba(148, 163, 184, 0.7);
       background: rgba(15, 23, 42, 0.96);
       color: #e5e7eb;
     }
 
-    .skills-meter-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.78rem;
-      margin-top: 0.4rem;
-    }
-
-    .skills-meter {
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.95);
-      overflow: hidden;
-      margin-top: 0.3rem;
-    }
-
-    .skills-meter-fill {
-      height: 100%;
-      border-radius: 999px;
-      background: linear-gradient(to right, #facc15, #f97316);
-    }
-
     .skills-meta {
       font-size: 0.8rem;
       color: var(--text-muted);
-      margin-top: 0.4rem;
+      margin-top: 0.45rem;
     }
 
-    /* Timeline */
+    /* Studio section uses same card styles, so no extra CSS */
+
     .timeline {
       border-radius: var(--radius-lg);
       border: 1px solid var(--border-subtle);
-      background: rgba(6, 8, 9, 0.98);
-      padding: 0.9rem 1rem;
+      background: rgba(9, 12, 16, 0.98);
+      padding: 0.9rem 1.1rem;
       font-size: 0.82rem;
     }
 
@@ -644,9 +580,9 @@
       display: grid;
       grid-template-columns: auto minmax(0, 1fr);
       column-gap: 0.6rem;
-      row-gap: 0.1rem;
+      row-gap: 0.12rem;
       position: relative;
-      padding-left: 0.2rem;
+      padding-left: 0.15rem;
     }
 
     .timeline-row + .timeline-row {
@@ -657,7 +593,7 @@
     .timeline-row + .timeline-row::before {
       content: "";
       position: absolute;
-      left: 6px;
+      left: 5px;
       top: -0.55rem;
       width: 1px;
       height: 0.55rem;
@@ -686,29 +622,29 @@
       font-size: 0.86rem;
     }
 
-    /* Contact */
+    /* CONTACT */
+
     .contact-card {
       border-radius: var(--radius-lg);
       background:
-        radial-gradient(circle at top left, rgba(245, 197, 66, 0.2), transparent 60%),
-        radial-gradient(circle at bottom right, rgba(6, 8, 9, 0.98), rgba(6, 8, 9, 1));
+        radial-gradient(circle at top left, var(--accent-soft), transparent 60%),
+        rgba(9, 12, 16, 0.98);
       border: 1px solid var(--border-subtle);
       padding: 1rem 1.1rem;
-      font-size: 0.9rem;
       display: grid;
-      gap: 0.9rem;
+      gap: 0.8rem;
+      font-size: 0.9rem;
     }
 
     @media (min-width: 768px) {
       .contact-card {
-        grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
         align-items: center;
       }
     }
 
     .contact-text {
       color: var(--text-muted);
-      font-size: 0.9rem;
     }
 
     .contact-highlight {
@@ -723,10 +659,10 @@
 
     .contact-pill {
       font-size: 0.8rem;
-      padding: 0.3rem 0.7rem;
-      border-radius: 999px;
-      background: rgba(6, 8, 9, 0.96);
-      border: 1px solid rgba(148, 163, 184, 0.65);
+      padding: 0.35rem 0.8rem;
+      border-radius: var(--radius-pill);
+      background: rgba(7, 9, 12, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.7);
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
@@ -736,9 +672,9 @@
 
     .contact-pill:hover {
       border-color: var(--accent-strong);
-      background: rgba(6, 8, 9, 0.98);
+      background: rgba(7, 9, 12, 0.99);
       transform: translateY(-1px);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.9);
     }
 
     .contact-pill span {
@@ -747,6 +683,8 @@
     }
 
     footer {
+      position: relative;
+      z-index: 1;
       padding: 0.8rem 1.5rem 1.1rem;
       border-top: 1px solid rgba(148, 163, 184, 0.25);
       font-size: 0.78rem;
@@ -754,7 +692,7 @@
       justify-content: space-between;
       gap: 0.6rem;
       color: var(--text-muted);
-      background: linear-gradient(to right, #020617, #020304);
+      background: linear-gradient(to right, #020308, #020308);
     }
 
     footer a {
@@ -774,7 +712,7 @@
     <div class="shell">
       <header class="nav">
         <div class="nav-left">
-          <!-- Logo image: upload your gold hummingbird as logo-hummingbird.png in this repo -->
+          <!-- Use your gold hummingbird as logo-hummingbird.png in this repo -->
           <img src="logo-hummingbird.png" alt="Vitae Interactive logo" class="logo-img">
           <div>
             <div class="logo-text-main">Vitae Interactive</div>
@@ -784,6 +722,7 @@
         <nav class="nav-links">
           <a href="#work">Work</a>
           <a href="#skills">Skills</a>
+          <a href="#studio">Studio</a>
           <a href="#timeline">Path</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -794,32 +733,38 @@
       </header>
 
       <main>
-        <!-- Hero -->
+        <!-- HERO -->
         <section aria-labelledby="hero-heading">
           <div class="hero">
             <div>
-              <div class="hero-eyebrow">
-                Technical Designer in training · <span>Portfolio in progress</span>
+              <div class="hero-badge-row">
+                <div class="hero-pill">
+                  Technical Designer in training
+                </div>
+                <div class="hero-pill">
+                  Portfolio <span>growing in public</span>
+                </div>
               </div>
+
               <h1 class="hero-title" id="hero-heading">
-                Designing <span>systems, tools,</span> and moment-to-moment play.
+                Whimsical worlds, <span>grounded systems.</span>
               </h1>
               <p class="hero-lede">
-                I’m an Interactive Technology student focusing on <strong>Technical Design</strong> —
-                turning ideas into <strong>playable systems</strong> in Unreal Engine: abilities, AI,
-                tools, and workflows that help teams move faster.
+                I’m building Vitae Interactive as a home for playful prototypes, thoughtful systems,
+                and tools that make game development feel a little more magical (and a lot more efficient).
               </p>
               <p class="hero-meta">
-                Currently studying at <strong>Full Sail University</strong> · Projected graduation: <strong>2028</strong>.
+                Interactive Technology student at <strong>Full Sail University</strong> ·
+                Projected graduation: <strong>2028</strong>.
               </p>
 
               <div class="hero-actions">
                 <a href="#work" class="btn-primary">
-                  View featured work
+                  See featured work
                   <span class="btn-icon">↘</span>
                 </a>
                 <a href="#contact" class="btn-ghost">
-                  Let’s connect
+                  Say hello
                   <span class="btn-icon">✉</span>
                 </a>
               </div>
@@ -827,184 +772,149 @@
               <div class="hero-tags">
                 <div class="chip">Unreal Engine · <span>Blueprints</span></div>
                 <div class="chip">Gameplay <span>systems</span> & tools</div>
-                <div class="chip">Gold & gunmetal <span>Vitae Interactive</span> identity</div>
+                <div class="chip">Gold & gunmetal <span>Vitae Interactive</span></div>
               </div>
             </div>
 
             <div class="hero-right" aria-hidden="true">
               <div class="hero-card">
-                <div class="hero-grid">
-                  <div class="hero-grid-main">
-                    <div class="hero-grid-row">
-                      <div>
-                        <div class="pill-label">Focus</div>
-                        <div class="pill-value">Technical Designer</div>
-                      </div>
-                    </div>
+                <div class="hero-card-inner">
+                  <div class="hero-card-title">Current focus</div>
+                  <p>
+                    Tight-feeling movement, expressive abilities, and designer-friendly tools
+                    that help small teams experiment quickly.
+                  </p>
 
-                    <div class="hero-stat">
-                      <div class="hero-stat-label">Core strengths</div>
-                      <div class="hero-stat-value">Systems · Blueprints · Tools</div>
-                      <div class="hero-meter">
-                        <div class="hero-meter-fill"></div>
-                      </div>
-                      <div class="hero-tagline">
-                        Building a portfolio of <strong>small, shippable prototypes</strong> and
-                        <strong>designer-friendly tools</strong>.
-                      </div>
+                  <div class="hero-card-row">
+                    <div>
+                      <div style="font-size:0.76rem; color:var(--text-muted);">Discipline</div>
+                      <div style="font-size:0.9rem; font-weight:500;">Technical Design</div>
                     </div>
-
-                    <div class="hero-stat">
-                      <div class="hero-stat-label">In the next 90 days</div>
-                      <div class="hero-stat-value">Movement · Abilities · AI · Utility widgets</div>
-                      <div class="hero-tagline">
-                        Following a structured roadmap to grow into a studio-ready Technical Designer.
-                      </div>
-                    </div>
+                    <div class="hero-mini-pill">Systems · Tools · AI</div>
                   </div>
 
-                  <div class="hero-grid-side">
-                    <div class="mini-card">
-                      <strong>Tooling mindset</strong>
-                      <p>
-                        I’m especially interested in <strong>designer-focused workflows</strong> —
-                        enemy spawners, debug overlays, and data-driven systems that keep iteration fast.
-                      </p>
-                      <span class="mini-pill">“Make it easy for the team.”</span>
-                    </div>
-                    <div class="mini-card">
-                      <strong>Open to opportunities</strong>
-                      <p>
-                        Game jams, junior roles, mentorship, or indie collaborations — especially where
-                        I can own <strong>abilities, AI, or tools</strong> in Unreal.
-                      </p>
-                    </div>
+                  <div class="hero-meter">
+                    <div class="hero-meter-fill"></div>
                   </div>
-                </div>
-              </div>
-
-              <div class="hero-orbit">
-                <div class="hero-orbit-ring">
-                  <div class="hero-orbit-dot"></div>
+                  <p class="hero-note">
+                    This portfolio follows a 90-day roadmap of small, shippable prototypes
+                    rather than one giant final project.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- Work / Projects -->
+        <!-- WORK -->
         <section id="work" aria-labelledby="work-heading">
           <div class="section-label">Featured work</div>
-          <h2 class="section-title" id="work-heading">Systems, prototypes & technical design</h2>
+          <h2 class="section-title" id="work-heading">Systems, prototypes & playful experiments</h2>
           <p class="section-subtitle">
-            These projects highlight how I think about <strong>gameplay systems</strong>,
+            These projects highlight how I approach <strong>gameplay systems</strong>,
             <strong>moment-to-moment feel</strong>, and <strong>designer-friendly implementation</strong>.
-            As I progress through my roadmap, I’ll refine and expand this section.
+            As more prototypes land on itch.io, I’ll link them here.
           </p>
 
-          <div class="projects-grid" style="margin-top: 1.1rem;">
+          <div class="projects-grid" style="margin-top:1rem;">
             <!-- Project 1 -->
             <article class="project-card">
-              <div class="project-chip-row">
+              <div class="project-tag-row">
                 <span class="project-tag">Prototype · Unreal Blueprints</span>
-                <span class="project-meta">Solo · In progress</span>
+                <span>Solo · In progress</span>
               </div>
               <h3 class="project-title">Core Movement & Interaction Sandbox</h3>
-              <p class="project-body">
-                A foundation prototype focused on <strong>responsive movement</strong>, basic interaction,
-                and camera control — building the “feel” layer that other systems can plug into.
+              <p>
+                A small playground for testing character feel: movement, jumping, sprinting,
+                and interacting with the world.
               </p>
               <ul class="project-list">
-                <li>Implemented walk, jump, and sprint using Blueprint state logic.</li>
-                <li>Built a reusable interaction system based on trace + interfaces.</li>
-                <li>Documented graphs and decisions for future tutorials.</li>
+                <li>Blueprint-based movement with simple state logic.</li>
+                <li>Reusable interaction system built on traces + interfaces.</li>
+                <li>Set up to quickly swap cameras and input schemes.</li>
               </ul>
               <a href="#" class="project-link">
-                Add demo link or video later
+                Add demo link or video when ready
                 <span>↗</span>
               </a>
-              <div class="project-orbit-blur"></div>
             </article>
 
             <!-- Project 2 -->
             <article class="project-card">
-              <div class="project-chip-row">
+              <div class="project-tag-row">
                 <span class="project-tag">System design · Data-driven</span>
-                <span class="project-meta">Solo · Planned</span>
+                <span>Solo · Planned</span>
               </div>
               <h3 class="project-title">Ability & Cooldown Framework</h3>
-              <p class="project-body">
-                A Blueprint-based ability system with cooldowns, costs, and states, designed to be
-                <strong>data-driven</strong> so designers can add new abilities without touching logic.
+              <p>
+                A flexible ability system with clear states and tunable values so designers
+                can invent new moves without digging through logic.
               </p>
               <ul class="project-list">
-                <li>Ability states: ready, casting, cooldown, disabled.</li>
-                <li>Configurable via Data Tables for quick tuning.</li>
-                <li>Built-in debug view for testing ability flow.</li>
+                <li>Ability lifecycle: ready → casting → cooldown → disabled.</li>
+                <li>Data Tables for balancing costs, cooldowns, and VFX hooks.</li>
+                <li>Built-in debug view to trace ability flow during playtests.</li>
               </ul>
               <a href="#" class="project-link">
-                Add system breakdown later
+                Document this system as it evolves
                 <span>↗</span>
               </a>
-              <div class="project-orbit-blur"></div>
             </article>
 
             <!-- Project 3 -->
             <article class="project-card">
-              <div class="project-chip-row">
-                <span class="project-tag">AI · Behavior · Tools</span>
-                <span class="project-meta">Roadmap milestone</span>
+              <div class="project-tag-row">
+                <span class="project-tag">AI · Encounters</span>
+                <span>Roadmap milestone</span>
               </div>
-              <h3 class="project-title">Enemy Patrol, Chase & Encounter Prototyping</h3>
-              <p class="project-body">
-                A small AI sandbox: simple enemies that patrol, detect the player, and create
-                repeatable combat encounters — including tools for tuning difficulty curves.
+              <h3 class="project-title">Patrol, Chase & Tiny Boss Moments</h3>
+              <p>
+                A whimsical enemy sandbox: curious patrols that notice the player, give chase,
+                and create repeatable little “setpiece” encounters.
               </p>
               <ul class="project-list">
-                <li>Behavior Tree–driven patrol and chase states.</li>
-                <li>Configurable detection radii and aggression.</li>
-                <li>Designed to plug into greyboxed levels quickly.</li>
+                <li>Behavior Tree–driven patrol and chase patterns.</li>
+                <li>Tunable detection cones and “bravery” levels.</li>
+                <li>Designed to drop into greyboxed levels quickly.</li>
               </ul>
               <a href="#" class="project-link">
-                Add AI demo or jam entry
+                Connect to an itch.io prototype later
                 <span>↗</span>
               </a>
-              <div class="project-orbit-blur"></div>
             </article>
 
             <!-- Project 4 -->
             <article class="project-card">
-              <div class="project-chip-row">
-                <span class="project-tag">Tools · Utility widget</span>
-                <span class="project-meta">Planned</span>
+              <div class="project-tag-row">
+                <span class="project-tag">Tools · Utility widgets</span>
+                <span>Planned</span>
               </div>
-              <h3 class="project-title">Designer-Friendly Enemy Spawner Tool</h3>
-              <p class="project-body">
-                An in-editor tool that lets designers drop in enemy encounters quickly,
-                with control over composition, pacing, and difficulty — no Blueprint diving required.
+              <h3 class="project-title">Designer-Friendly Enemy Spawner</h3>
+              <p>
+                An in-editor tool for sketching encounters: sprinkle enemies into a level,
+                choose formations, and preview difficulty at a glance.
               </p>
               <ul class="project-list">
-                <li>Uses Editor Utility Widgets and Data Assets.</li>
-                <li>One-click spawn presets for playtesting.</li>
-                <li>Designed to reduce iteration friction for the team.</li>
+                <li>Editor Utility Widget + Data Assets for presets.</li>
+                <li>One-click spawn groups for rapid iteration.</li>
+                <li>Designed to keep designers out of Blueprint spaghetti.</li>
               </ul>
               <a href="#" class="project-link">
-                Document this tool as you build it
+                Turn this into a behind-the-scenes devlog
                 <span>↗</span>
               </a>
-              <div class="project-orbit-blur"></div>
             </article>
           </div>
         </section>
 
-        <!-- Skills -->
+        <!-- SKILLS -->
         <section id="skills" aria-labelledby="skills-heading">
           <div class="section-label">Skills & tools</div>
-          <h2 class="section-title" id="skills-heading">What I’m building toward as a Technical Designer</h2>
+          <h2 class="section-title" id="skills-heading">What I’m growing as a Technical Designer</h2>
 
-          <div class="skills-grid" style="margin-top: 1rem;">
-            <div class="skills-card">
-              <strong>Core technical & design skills</strong>
+          <div class="skills-grid" style="margin-top:1rem;">
+            <div class="card-soft">
+              <strong>Technical & design skills</strong>
               <div class="skills-list">
                 <span class="skills-badge">Unreal Engine · Blueprints</span>
                 <span class="skills-badge">Gameplay systems</span>
@@ -1013,30 +923,13 @@
                 <span class="skills-badge">Prototyping</span>
                 <span class="skills-badge">Debugging & iteration</span>
               </div>
-
-              <div class="skills-meter-row">
-                <span>Unreal / Blueprints</span>
-                <span>Growing →</span>
-              </div>
-              <div class="skills-meter">
-                <div class="skills-meter-fill" style="width: 45%;"></div>
-              </div>
-
-              <div class="skills-meter-row">
-                <span>Systems & tools thinking</span>
-                <span>Roadmap aligned</span>
-              </div>
-              <div class="skills-meter">
-                <div class="skills-meter-fill" style="width: 55%;"></div>
-              </div>
-
               <p class="skills-meta">
-                I’m intentionally building a portfolio that highlights
-                <strong>practical systems, tools, and prototypes</strong> instead of one-off school assignments.
+                I’m prioritizing <strong>feel + clarity</strong>: systems that are fun to use,
+                easy to tune, and friendly to the rest of the team.
               </p>
             </div>
 
-            <div class="skills-card">
+            <div class="card-soft">
               <strong>Complementary skills</strong>
               <div class="skills-list">
                 <span class="skills-badge">Game design fundamentals</span>
@@ -1046,15 +939,61 @@
                 <span class="skills-badge">Documentation & tutorials</span>
               </div>
               <p class="skills-meta">
-                I’m also interested in <strong>teaching what I learn</strong> — using tools like
-                YouTube, written breakdowns, and visual documentation
-                to share progress as Vitae Interactive grows.
+                Vitae Interactive is also a space to <strong>teach as I learn</strong> —
+                sharing breakdowns, systems diagrams, and small assets for other devs.
               </p>
             </div>
           </div>
         </section>
 
-        <!-- Timeline -->
+        <!-- STUDIO / BRAND -->
+        <section id="studio" aria-labelledby="studio-heading">
+          <div class="section-label">Studio vision</div>
+          <h2 class="section-title" id="studio-heading">Vitae Interactive as a future studio</h2>
+          <p class="section-subtitle">
+            Vitae Interactive isn’t just a portfolio label — it’s the early shape of an
+            <strong>independent studio</strong> focused on playful systems, approachable tools,
+            and games that quietly teach you how they work while you’re having fun.
+          </p>
+
+          <div class="skills-grid" style="margin-top:1rem;">
+            <div class="card-soft">
+              <strong>Mission & creative focus</strong>
+              <p style="margin-top:0.4rem;">
+                Long term, I imagine Vitae Interactive as a small team crafting:
+              </p>
+              <ul class="project-list" style="margin-top:0.35rem; margin-bottom:0;">
+                <li><strong>Mechanics-driven games</strong> where movement and abilities feel expressive.</li>
+                <li><strong>Readable systems</strong> with clear feedback and low “design friction.”</li>
+                <li><strong>Thoughtful difficulty curves</strong> that invite curiosity instead of frustration.</li>
+              </ul>
+              <p class="skills-meta">
+                The prototypes and tools on this site are the first pieces of that future
+                studio’s <strong>tech and design backbone</strong>.
+              </p>
+            </div>
+
+            <div class="card-soft">
+              <strong>Play · Build · Teach</strong>
+              <p style="margin-top:0.4rem;">
+                The studio idea lives on three pillars:
+              </p>
+              <ul class="project-list" style="margin-top:0.35rem;">
+                <li><strong>Play</strong> – small but polished experiments, released on itch.io.</li>
+                <li><strong>Build</strong> – internal tools, frameworks, and reusable systems.</li>
+                <li><strong>Teach</strong> – breakdowns, tutorials, and assets other devs can plug in.</li>
+              </ul>
+              <p class="skills-meta">
+                You can already see this starting on
+                <a href="https://vitae-interactive.itch.io" target="_blank" rel="noreferrer" style="color:var(--accent-strong);">
+                  vitae-interactive.itch.io
+                </a>, where future experiments will live.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TIMELINE -->
         <section id="timeline" aria-labelledby="timeline-heading">
           <div class="section-label">Path</div>
           <h2 class="section-title" id="timeline-heading">From student to studio-ready</h2>
@@ -1065,8 +1004,8 @@
               <div class="timeline-content">
                 <div class="timeline-label">Now → Year 1</div>
                 <div>
-                  <strong>Foundations & prototypes</strong> · Learning Unreal Engine, Blueprints,
-                  movement, interaction, and core gameplay systems. Beginning to document and showcase work.
+                  <strong>Foundations & tiny experiments</strong> · Learning Unreal, Blueprints,
+                  character feel, and interaction. Building the first wave of small prototypes.
                 </div>
               </div>
             </div>
@@ -1076,8 +1015,9 @@
               <div class="timeline-content">
                 <div class="timeline-label">Year 2–3</div>
                 <div>
-                  <strong>Systems, AI & tools</strong> · Building more advanced abilities, AI behaviors,
-                  and designer-facing tools. Participating in game jams and small collaborations.
+                  <strong>Systems, AI & tools</strong> · Deeper ability systems, AI behaviors,
+                  and editor tools that speed up level and encounter design. More jam games and
+                  itch.io releases.
                 </div>
               </div>
             </div>
@@ -1088,15 +1028,15 @@
                 <div class="timeline-label">Leading up to 2028</div>
                 <div>
                   <strong>Studio-ready Technical Designer</strong> · A portfolio of shipped prototypes,
-                  tools, and systems — backed by documentation, videos, and a clear focus on
-                  gameplay systems and production-ready workflows.
+                  systems, and tools — with documentation and videos that make how they work
+                  as clear as how they feel.
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- Contact -->
+        <!-- CONTACT -->
         <section id="contact" aria-labelledby="contact-heading">
           <div class="section-label">Contact</div>
           <h2 class="section-title" id="contact-heading">Let’s build something</h2>
@@ -1104,13 +1044,14 @@
           <div class="contact-card">
             <div>
               <p class="contact-text">
-                Whether it’s a <span class="contact-highlight">junior Technical Designer opportunity</span>,
+                Whether it’s a <span class="contact-highlight">junior Technical Designer role</span>,
                 a <span class="contact-highlight">small prototype</span>, or an
-                <span class="contact-highlight">indie collaboration</span>, I’m interested in roles where I can
-                own <strong>gameplay systems, tools, and moment-to-moment feel</strong>.
+                <span class="contact-highlight">indie collaboration</span>, I’m interested in spaces
+                where I can own <strong>gameplay systems, tools, and moment-to-moment feel</strong>.
               </p>
-              <p class="contact-text" style="margin-top: 0.5rem;">
-                I’m especially excited about Unreal Engine projects with room to experiment and iterate.
+              <p class="contact-text" style="margin-top:0.5rem;">
+                I’m especially excited about Unreal Engine projects with room to experiment,
+                iterate, and grow alongside a team.
               </p>
             </div>
 
@@ -1143,7 +1084,7 @@
           © <span id="year"></span> Vitae Interactive. All rights reserved.
         </div>
         <div>
-          Built in gold & gunmetal · Focused on <strong>Technical Design</strong>.
+          Gold & gunmetal, a hummingbird in flight, and a focus on <strong>Technical Design</strong>.
         </div>
       </footer>
     </div>
